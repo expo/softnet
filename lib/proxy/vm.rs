@@ -61,10 +61,7 @@ impl Proxy {
         // Once we've learned the VM's IP from the DHCP snooping,
         // allow all global traffic for that VM's IP
         if let Some(lease) = &self.dhcp_snooper.lease() {
-            let dst_is_global =
-                ip_network::IpNetwork::from(Ipv4Addr::from(ipv4_pkt.dst_addr().0)).is_global();
-
-            if lease.valid_ip_source(ipv4_pkt.src_addr()) && dst_is_global {
+            if lease.valid_ip_source(ipv4_pkt.src_addr()) {
                 return Some(());
             }
         }
