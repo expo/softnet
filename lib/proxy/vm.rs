@@ -61,6 +61,9 @@ impl Proxy {
         // Once we've learned the VM's IP from the DHCP snooping,
         // allow all global traffic for that VM's IP
         if let Some(lease) = &self.dhcp_snooper.lease() {
+            
+            // Here we may add further filtering based on list of allowed IPs
+
             if lease.valid_ip_source(ipv4_pkt.src_addr()) {
                 return Some(());
             }
