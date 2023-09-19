@@ -21,7 +21,7 @@ jobs:
 
       - name: Archive
         run: |
-          tar -czvf softnet.tar.gz -C target/release softnet
+          tar -czvf softnet.tar.gz -C target/aarch64-apple-darwin/release softnet
 
       - name: Upload archive
         uses: actions/upload-artifact@v3
