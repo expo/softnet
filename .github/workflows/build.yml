@@ -3,6 +3,9 @@ name: build
 on:
   push:
     branches: [main]
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -13,11 +16,12 @@ jobs:
 
       - name: Build
         run: |
-          cargo build --profile release
+          rustup target add aarch64-apple-darwin
+          cargo build --profile release --target aarch64-apple-darwin
 
       - name: Archive
         run: |
-          tar -czvf softnet.tar.gz -C target/release softnet
+          tar -czvf softnet.tar.gz -C target/aarch64-apple-darwin/release softnet
 
       - name: Upload archive
         uses: actions/upload-artifact@v3
