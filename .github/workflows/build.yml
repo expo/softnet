@@ -3,6 +3,9 @@ name: build
 on:
   push:
     branches: [main]
+  pull_request:
+    branches:
+      - main
 
 jobs:
   build:
@@ -13,7 +16,7 @@ jobs:
 
       - name: Build
         run: |
-          cargo build --profile release
+          cargo build --profile release --target aarch64-apple-darwin
 
       - name: Archive
         run: |
